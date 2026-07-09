@@ -1,0 +1,6 @@
+[submodule "ig-reel-uploader"]
+	path = ig-reel-uploader
+	url = ./ig-reel-uploader
+[submodule "video-maker"]
+	path = video-maker
+	url = ./video-maker
