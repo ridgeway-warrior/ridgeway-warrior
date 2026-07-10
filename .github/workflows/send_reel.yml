@@ -9,6 +9,7 @@ jobs:
             - uses: actions/checkout@main
               with: 
                 submodules: "recursive"
+            - run: echo "::add-mask::${{secrets.OPENAI_API_TOKEN}}"
             - uses: "actions/setup-node@main"
             - uses: "pnpm/action-setup@master"
               with: 
