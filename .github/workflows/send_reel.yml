@@ -1,0 +1,34 @@
+name: Create and Publish Reel on Instagram
+on: workflow_dispatch
+
+jobs:
+    create-reel:
+        runs-on: ubuntu-24.04
+        name: create the ig reel
+        steps:
+            - uses: actions/checkout@main
+              with: 
+                submodules: "recursive"
+            - uses: "actions/setup-node@main"
+            - uses: "pnpm/action-setup@master"
+              with: 
+                version: 11
+            - run: |
+                cd video-maker
+                pnpm ci
+                pnpm remotion render MyComp ../ig-reeel-uploader
+                cd ..
+              env:
+                OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
+            - run: |
+                cd ig-reel-uploader
+                pnpm ci
+                node index.js
+              env:
+                S3_ID: ${{secrets.S3_ID}}
+                S3_SECRET: ${{secrets.S3_SECRET}}
+                ENDPOINT: ${{secrets.ENDPOINT}}
+                IG_TOKEN: ${{secrets.IG_TOKEN}}
+                IG_USER_ID: ${{secrets.IG_USER_ID}}
+
+
