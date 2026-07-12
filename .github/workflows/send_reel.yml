@@ -1,8 +1,6 @@
 name: Create and Publish Reel on Instagram
 on: 
     workflow_dispatch:
-    schedule:
-        - cron: "*/5 * * * *"
 
 jobs:
     create-reel:
