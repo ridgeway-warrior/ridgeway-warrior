@@ -32,7 +32,9 @@ jobs:
           npm ci
       
       - name: Build application with ESBuild
-        run: npm run build
+        run: |
+          cd aws-lambda
+          npm run build
 
       - name: Deploy Lambda Function
         uses: aws-actions/aws-lambda-deploy@v1
