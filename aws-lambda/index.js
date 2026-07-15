@@ -1,9 +1,7 @@
-import { loadEnvFile } from "node:process"
 import { Octokit } from "octokit"
 
 export async function handler(event) {
 
-  loadEnvFile()
 
   // Octokit.js
   // https://github.com/octokit/core.js#readme
