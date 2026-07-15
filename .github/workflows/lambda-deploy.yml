@@ -3,8 +3,14 @@ name: Deploy AWS Lambda
 on:
   push:
     branches: 
-      - main
+      - master
+    paths:
+      - 'lambda-workflow-dispatcher'
   workflow_dispatch:
+
+concurrency:
+  group: 'lambda-deploy'
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -22,9 +28,9 @@ jobs:
           aws-region: us-west-2
       
       - name: Setup Node
-        uses: "actions/setup-node@main"
+        uses: "actions/setup-node@v7.0.0"
         with: 
-          node-version: 24
+          node-version: 24.14
       
       - name: setup pnpm and install dependencies
         uses: pnpm/action-setup@v6.0.9
