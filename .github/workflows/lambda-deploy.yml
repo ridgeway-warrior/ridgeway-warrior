@@ -26,15 +26,19 @@ jobs:
         with: 
           node-version: 24
       
-      - name: donwload depencies
-        run: |
-          cd aws-lambda
-          npm ci
-      
+      - name: setup pnpm and install dependencies
+        uses: pnpm/action-setup@v6.0.9
+        with:
+          version: 11.13
+          cache: true
+          cache_dependency_path: lambda-workflow-dispatcher/pnpm-lock.yaml
+          run_install: |
+            cwd: lambda-workflow-dispatcher
+
       - name: Build application with ESBuild
         run: |
-          cd aws-lambda
-          npm run build
+          cd lambda-workflow-dispatcher
+          pnpm build
 
       - name: Deploy Lambda Function
         uses: aws-actions/aws-lambda-deploy@v1
